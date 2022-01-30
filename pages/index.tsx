@@ -5,11 +5,9 @@ import Header from "../components/Header"
 export default function Home() {
   return (
     <>
-    <Header />
       <div className="bg-grey-600 w-full min-h-screen">
 
       </div>
-      <Footer/>
     </>
   )
 }
