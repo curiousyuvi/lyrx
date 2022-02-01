@@ -1,11 +1,6 @@
 import Image from "next/image";
-import { FaRegHeart, FaSearch } from "react-icons/fa";
-import { FiHome, FiLogIn, FiTrendingUp } from "react-icons/fi";
-import { BiHistory } from "react-icons/bi";
 import Link from "next/link";
 import { useState } from "react";
-import DrawerLink from "./DrawerLink";
-import Drawer from "./Drawer";
 import Navigation from "./Navigation";
 
 export default function Header() {
@@ -13,7 +8,7 @@ export default function Header() {
 
   return (
     <>
-      <nav className="bg-clip-padding backdrop-filter backdrop-blur-md border border-gray-200 px-6 py-1 flex justify-center items-center w-full h-20 shadow-md fixed">
+      <nav className="bg-clip-padding backdrop-filter backdrop-blur-md border border-indigo-200 border-t-0 border-x-0 px-6 py-1 flex justify-center items-center shadow w-full h-20 fixed">
         <div className=" flex justify-between items-center w-[1280px] h-20">
           <Link href="/" passHref>
             <a>
