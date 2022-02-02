@@ -8,8 +8,8 @@ export default function Header() {
 
   return (
     <>
-      <nav className="bg-clip-padding backdrop-filter backdrop-blur-md border border-indigo-200 border-t-0 border-x-0 px-6 py-1 flex justify-center items-center shadow w-full h-20 fixed">
-        <div className=" flex justify-between items-center w-[1280px] h-20">
+      <nav className="z-40 bg-clip-padding backdrop-filter backdrop-blur-md border border-indigo-200 border-t-0 border-x-0 px-6 py-1 flex justify-center items-center shadow w-full h-20 fixed">
+        <div className=" flex justify-between items-center w-[1280px] h-20 pl-4">
           <Link href="/" passHref>
             <a>
               <div className="h-[10px]"></div>

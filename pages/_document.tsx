@@ -10,7 +10,7 @@ class MyDocument extends Document {
     return (
       <Html className="h-full w-full m-0 p-0">
         <Head />
-        <body className="min-h-[calc(100vh+8rem) w-full  m-0 p-0">
+        <body className="min-h-[calc(100%+8rem) w-full  m-0 p-0 box-border">
           <Main />
           <NextScript />
         </body>

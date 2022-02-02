@@ -1,14 +1,16 @@
+const defaultTheme = require("tailwindcss/defaultTheme");
+
 module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {
-      backgroundImage: {
-        "rm-back": "url('../public/rm4.jpeg')",
-      },
+    screens: {
+      xsm: "460px",
+      ...defaultTheme.screens,
     },
   },
+
   plugins: [],
 };
