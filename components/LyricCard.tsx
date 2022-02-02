@@ -4,7 +4,7 @@ import { FiArrowRight } from "react-icons/fi";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { useState } from "react";
 
-export default function LyricCard({ song_artist, song_title }) {
+export default function LyricCard({ artist, title }) {
   {
     const [liked, setLiked] = useState(false);
     return (
@@ -13,13 +13,13 @@ export default function LyricCard({ song_artist, song_title }) {
           <div className="flex items-start justify-start my-1">
             <FaMicrophoneAlt className="my-[7px] mr-2 text-indigo-400" />
             <p className="max-h-10 w-11/12 text-sm font-medium text-gray-600 overflow-hidden">
-              {song_artist}
+              {artist}
             </p>
           </div>
           <div className="flex items-start justify-start my-1">
             <BsMusicNote className="my-[7px] mr-2 text-indigo-400" />
             <p className="max-h-10 w-11/12 text-sm font-medium text-gray-600 overflow-hidden">
-              {song_title}
+              {title}
             </p>
           </div>
         </div>
