@@ -1,8 +1,11 @@
 import Link from "next/link";
+import { useState } from "react";
 import { FiSearch, FiMenu } from "react-icons/fi";
 import Drawer from "./Drawer";
 
-export default function MobileNav({ navBarOpen, setNavBarOpen }) {
+export default function MobileNav() {
+  const [navBarOpen, setNavBarOpen] = useState(false);
+
   return (
     <div className="flex justify-center items-center">
       <Link href="/search">

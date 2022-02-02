@@ -4,8 +4,6 @@ import { useState } from "react";
 import Navigation from "./Navigation";
 
 export default function Header() {
-  const [navBarOpen, setNavBarOpen] = useState(false);
-
   return (
     <>
       <nav className="z-40 bg-clip-padding backdrop-filter backdrop-blur-md border border-indigo-200 border-t-0 border-x-0 px-6 py-1 flex justify-center items-center shadow w-full h-20 fixed">
@@ -21,7 +19,7 @@ export default function Header() {
               />
             </a>
           </Link>
-          <Navigation navBarOpen={navBarOpen} setNavBarOpen={setNavBarOpen} />
+          <Navigation />
         </div>
       </nav>
     </>

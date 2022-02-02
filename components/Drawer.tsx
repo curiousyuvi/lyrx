@@ -29,12 +29,6 @@ export default function Drawer({ open, setOpen }) {
           setOpen={setOpen}
         />
         <DrawerLink
-          path="/popular"
-          buttonText="Popular"
-          ButtonIcon={FiTrendingUp}
-          setOpen={setOpen}
-        />
-        <DrawerLink
           path="/favorites"
           buttonText="Favorites"
           ButtonIcon={FaRegHeart}

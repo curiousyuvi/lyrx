@@ -1,11 +1,11 @@
 import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
 
-export default function Navigation({ navBarOpen, setNavBarOpen }) {
+export default function Navigation() {
   return (
     <>
       <div className="lg:hidden">
-        <MobileNav navBarOpen={navBarOpen} setNavBarOpen={setNavBarOpen} />
+        <MobileNav />
       </div>
       <div className="hidden lg:flex">
         <DesktopNav />
