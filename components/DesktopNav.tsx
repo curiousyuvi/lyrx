@@ -17,7 +17,7 @@ export default function DesktopNav() {
         <button>
           <FaMicrophone className="text-[2.7rem] p-2 text-indigo-500 ml-2 hover:bg-indigo-500/10 hover:rounded-full" />
         </button>
-        <DesktopNavLink path="/home" title="Home" />
+        <DesktopNavLink path="/" title="Home" />
         <DesktopNavLink path="/favorites" title="Favorites" />
         <DesktopNavLink path="/history" title="History" />
         <Link href="/login" passHref>
