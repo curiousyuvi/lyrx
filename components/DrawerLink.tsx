@@ -22,7 +22,7 @@ export default function DrawerLink({
             " flex items-center px-8 py-3 my-2 font-medium hover:text-gray-800 hover:bg-black/5 rounded-xl"
           )}
         >
-          <ButtonIcon className="inline-block mr-10 text-2xl" />
+          <ButtonIcon className="inline-block mr-6 text-2xl" />
           <h2 className="inline-block">{buttonText}</h2>
         </div>
       </button>

@@ -1,15 +1,16 @@
+import { GetStaticProps } from "next";
 import Emoji from "../components/Emoji";
 import Greeting from "../components/Greeting";
 import LyricCards from "../components/LyricCards";
 import getCountry, { Country } from "../services/get_country";
-import getPopularSongs, { LyricCardItem } from "../services/get_popular_songs";
+import getPopularLyricCardItems, {
+  LyricCardItem,
+} from "../services/get_popular_lyric_card_items";
 
 export default function Home({
-  country,
   hours,
-  popularSongs,
+  popularSongs: popularLyricCardItems,
 }: {
-  country: Country;
   hours: number;
   popularSongs: LyricCardItem[];
 }) {
@@ -19,27 +20,25 @@ export default function Home({
         <Greeting hours={hours} />
         <div className="flex items-center my-4 mt-6">
           <h1 className="text-2xl sm:text-3xl font-medium text-gray-500 mr-4">
-            Trending Songs in {country.name}
-            <Emoji symbol="0x1F525" />
+            Trending Songs <Emoji symbol="0x1F525" />
           </h1>
         </div>
         <hr />
-        <LyricCards lyricCardItems={popularSongs} />
+        <LyricCards lyricCardItems={popularLyricCardItems} />
       </div>
     </div>
   );
 }
 
-export async function getStaticProps(context) {
-  const country = await getCountry();
-  const popularSongs = await getPopularSongs(country.code);
+export const getStaticProps: GetStaticProps = async (context) => {
+  const popularSongs = await getPopularLyricCardItems("US");
   console.log(popularSongs);
 
   return {
+    revalidate: 6400,
     props: {
-      country: country,
       hours: new Date().getHours(),
       popularSongs: popularSongs,
     },
   };
-}
+};
