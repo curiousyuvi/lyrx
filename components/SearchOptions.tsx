@@ -1,8 +1,6 @@
 import router from "next/router";
-import { GetStaticPaths, GetStaticProps } from "next/types";
 import { useRef } from "react";
 import ReactTooltip from "react-tooltip";
-import getLyricCardItems from "../services/get_lyric_card_items";
 
 export default function SearchOptions({
   lyricWord,
