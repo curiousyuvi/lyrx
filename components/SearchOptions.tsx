@@ -1,4 +1,7 @@
+import router from "next/router";
 import { GetStaticPaths, GetStaticProps } from "next/types";
+import { useRef } from "react";
+import ReactTooltip from "react-tooltip";
 import getLyricCardItems from "../services/get_lyric_card_items";
 
 export default function SearchOptions({
@@ -6,7 +9,9 @@ export default function SearchOptions({
   setLyricWord,
   desc,
   setDesc,
+  q,
 }) {
+  const searchButtonRef = useRef();
   return (
     <div
       className={`p-4 pt-6 my-4 w-full flex flex-col bg-indigo-50 rounded-lg text-gray-600 text-sm sm:text-lg shadow`}
@@ -51,9 +56,29 @@ export default function SearchOptions({
           </span>
         </div>
       </div>
-      <button className="m-0 mt-6 p-2 bg-indigo-500 text-white font-medium rounded-md w-24 place-self-center shadow hover:shadow-xl hover:shadow-indigo-500/10"onClick={()=>{
-        console.log('hello')
-      }}>
+      <button
+        ref={searchButtonRef}
+        className="m-0 mt-6 p-2 bg-indigo-500 text-white font-medium rounded-md w-24 place-self-center shadow hover:shadow-xl hover:shadow-indigo-500/10"
+        data-tip="Search with above filters"
+        onMouseEnter={() => {
+          ReactTooltip.show(searchButtonRef.current);
+        }}
+        onMouseLeave={() => {
+          ReactTooltip.hide(searchButtonRef.current);
+        }}
+        onClick={() => {
+          if (q != "") {
+            router.push({
+              pathname: "/search",
+              query: {
+                q: q,
+                lyric_word: lyricWord,
+                desc: desc,
+              },
+            });
+          }
+        }}
+      >
         Search
       </button>
     </div>

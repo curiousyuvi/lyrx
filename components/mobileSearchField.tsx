@@ -13,7 +13,7 @@ export default function MobileSearchField({ q, setQ, lyricWord, desc }) {
           setQ(e.target.value);
         }}
         onKeyDown={(e) => {
-          if (e.key == "Enter") {
+          if (e.key == "Enter" && q != "") {
             router.push({
               pathname: "/search",
               query: {
@@ -25,7 +25,21 @@ export default function MobileSearchField({ q, setQ, lyricWord, desc }) {
           }
         }}
       />
-      <button className="px-3 outline outline-1 outline-indigo-500 h-10 bg-indigo-500 rounded-r-md">
+      <button
+        className="px-3 outline outline-1 outline-indigo-500 h-10 bg-indigo-500 rounded-r-md"
+        onClick={() => {
+          if (q != "") {
+            router.push({
+              pathname: "/search",
+              query: {
+                q: q,
+                lyric_word: lyricWord,
+                desc: desc,
+              },
+            });
+          }
+        }}
+      >
         <FaSearch className=" object-center left-4 text-md text-white " />
       </button>
     </div>

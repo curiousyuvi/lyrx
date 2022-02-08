@@ -15,7 +15,7 @@ export default async function getLyricCardItems(
       params: {
         q_track_artist: q,
         q_lyrics: lyricWord,
-        page_size: 10,
+        page_size: 50,
         page: 1,
         s_track_rating: desc,
         apikey: API_KEY,

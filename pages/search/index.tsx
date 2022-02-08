@@ -1,7 +1,7 @@
 import { IoMdOptions } from "react-icons/io";
 import DesktopSearchField from "../../components/desktopSearchField";
 import MobileSearchField from "../../components/mobileSearchField";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { MdClose } from "react-icons/md";
 import Image from "next/image";
 import SearchOptions from "../../components/SearchOptions";
@@ -10,6 +10,8 @@ import getLyricCardItems from "../../services/get_lyric_card_items";
 import LyricCards from "../../components/LyricCards";
 import { LyricCardItem } from "../../services/get_popular_lyric_card_items";
 import { useRouter } from "next/router";
+import { GetServerSideProps } from "next/types";
+import ReactTooltip from "react-tooltip";
 
 export default function Search({
   prop_q,
@@ -22,22 +24,11 @@ export default function Search({
   prop_desc: string;
   prop_lyricCardItems: LyricCardItem[];
 }) {
-  const router = useRouter();
   const [optionOpen, setOptionOpen] = useState(false);
+  const filterOptionsRef = useRef();
   const [q, setQ] = useState(prop_q);
   const [lyricWord, setLyricWord] = useState(prop_lyricWord);
   const [desc, setDesc] = useState(prop_desc);
-
-  const goToSearch = (q: string, lyricWord: string, desc: string) => {
-    router.push({
-      pathname: "/search",
-      query: {
-        q: q,
-        lyric_word: lyricWord,
-        desc: desc,
-      },
-    });
-  };
 
   return (
     <div className="bg-gray-100 min-h-screen w-full">
@@ -61,12 +52,22 @@ export default function Search({
               />
             </div>
             <button
+              ref={filterOptionsRef}
               onClick={() => {
                 setOptionOpen(!optionOpen);
               }}
               className={"text-xl text-white font-medium py-2 px-3 sm:py-3 sm:px-4 ml-2 flex justify-center items-center rounded-md shadow hover:shadow-indigo-500/20 hover:shadow-xl ".concat(
                 optionOpen ? "bg-indigo-100" : "bg-indigo-500"
               )}
+              data-tip={
+                optionOpen ? "close filter options" : "open filter options"
+              }
+              onMouseEnter={() => {
+                ReactTooltip.show(filterOptionsRef.current);
+              }}
+              onMouseLeave={() => {
+                ReactTooltip.hide(filterOptionsRef.current);
+              }}
             >
               {optionOpen ? (
                 <MdClose className="text-2xl" />
@@ -85,10 +86,11 @@ export default function Search({
               setLyricWord={setLyricWord}
               desc={desc}
               setDesc={setDesc}
+              q={q}
             />
           </div>
           <hr className="my-4" />
-          {!q ? (
+          {!prop_q ? (
             <div className="flex flex-col items-center text-2xl text-gray-500 justify-center w-full h-[300px]">
               <Image
                 src="/search.svg"
@@ -110,17 +112,25 @@ export default function Search({
   );
 }
 
-Search.getInitialProps = async ({ query }) => {
+interface Query {
+  q: string;
+  lyric_word: string;
+  desc: string;
+}
+
+export const getServerSideProps = async ({ query }: { query: Query }) => {
   return {
-    prop_q: query.q,
-    prop_lyricWord: query.lyric_word,
-    prop_desc: query.desc || "desc",
-    prop_lyricCardItems: !query.q
-      ? []
-      : await getLyricCardItems(
-          query.q,
-          query.lyric_word,
-          query.desc || "desc"
-        ),
+    props: {
+      prop_q: query.q || "",
+      prop_lyricWord: query.lyric_word || "",
+      prop_desc: query.desc || "desc",
+      prop_lyricCardItems: !query.q
+        ? []
+        : await getLyricCardItems(
+            query.q,
+            query.lyric_word,
+            query.desc || "desc"
+          ),
+    },
   };
 };

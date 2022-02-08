@@ -12,7 +12,7 @@ const getLyricsItem = async (
   title: string,
   id: string
 ): Promise<LyricsItem> => {
-  const lyricsItem = { lyrics: "No Lyrics Found : <" };
+  const lyricsItem = { lyrics: "No Lyrics Found :(" };
   try {
     const responseLOVH = await axios.get(
       `${LYRICSOVH_ENDPOINT}/${encodeURIComponent(artist)}/${encodeURIComponent(

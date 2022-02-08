@@ -10,7 +10,7 @@ export default function MobileNav() {
     <div className="flex justify-center items-center">
       <Link href="/search">
         <a>
-          <FiSearch className="p-2 rounded m-0 mr-1 xsm:mr-6 text-5xl text-indigo-400 rounded-full hover:text-indigo-500 hover:bg-indigo-500/5" />
+          <FiSearch className="p-2 rounded-full m-0 mr-1 xsm:mr-6 text-5xl text-indigo-400 rounded-full hover:text-indigo-500 hover:bg-indigo-500/5" />
         </a>
       </Link>
       <button
@@ -18,7 +18,7 @@ export default function MobileNav() {
           setNavBarOpen(!navBarOpen);
         }}
       >
-        <FiMenu className="p-2 rounded m-0 text-5xl text-gray-400 rounded-full hover:text-indigo-500 hover:bg-indigo-500/5" />
+        <FiMenu className="p-2 rounded-full m-0 text-5xl text-gray-400 rounded-full hover:text-indigo-500 hover:bg-indigo-500/5" />
       </button>
       <Drawer open={navBarOpen} setOpen={setNavBarOpen} />
     </div>
