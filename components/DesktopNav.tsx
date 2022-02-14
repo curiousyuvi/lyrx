@@ -6,7 +6,6 @@ import ReactTooltip from "react-tooltip";
 import DesktopNavLink from "./DesktopNavLink";
 
 export default function DesktopNav() {
-  const micRef = useRef();
   const loginButtonRef = useRef();
   const [q, setQ] = useState("");
   return (
@@ -35,18 +34,6 @@ export default function DesktopNav() {
             }}
           />
         </div>
-        <button
-          ref={micRef}
-          data-tip="Search song by voice"
-          onMouseEnter={() => {
-            ReactTooltip.show(micRef.current);
-          }}
-          onMouseLeave={() => {
-            ReactTooltip.hide(micRef.current);
-          }}
-        >
-          <FaMicrophone className="text-[2.7rem] p-2 text-indigo-500 ml-2 hover:bg-indigo-500/10 hover:rounded-full" />
-        </button>
         <DesktopNavLink path="/" title="Home" />
         <DesktopNavLink path="/favorites" title="Favorites" />
         <DesktopNavLink path="/history" title="History" />
