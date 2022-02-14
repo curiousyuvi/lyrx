@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps }) {
         <Component {...pageProps} />
       </SkeletonTheme>
       <ReactTooltip type="light" effect="solid" />
-      <Mic />
+      {/* <Mic /> */}
       <Footer />
     </>
   );
