@@ -1,11 +1,13 @@
 import Link from "next/link";
 import router from "next/router";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { FaMicrophone, FaSearch } from "react-icons/fa";
 import ReactTooltip from "react-tooltip";
+import { MyContext } from "../pages/_app";
 import DesktopNavLink from "./DesktopNavLink";
 
 export default function DesktopNav() {
+  const context = useContext(MyContext);
   const loginButtonRef = useRef();
   const [q, setQ] = useState("");
   return (
@@ -37,18 +39,19 @@ export default function DesktopNav() {
         <DesktopNavLink path="/" title="Home" />
         <DesktopNavLink path="/favorites" title="Favorites" />
         <DesktopNavLink path="/history" title="History" />
-        <Link href="/login" passHref>
-          <button
-            ref={loginButtonRef}
-            data-tip="Log in"
-            className="hover:bg-indigo-500 border border-indigo-400 px-4 py-2 mx-1 font-semibold text-indigo-400 hover:text-white rounded shadow hover:shadow-xl hover:shadow-indigo-500/10"
-            onMouseEnter={() => {
-              ReactTooltip.show(loginButtonRef.current);
-            }}
-          >
-            Log in
-          </button>
-        </Link>
+        <button
+          ref={loginButtonRef}
+          data-tip="Log in"
+          className="hover:bg-indigo-500 border border-indigo-400 px-4 py-2 mx-1 font-semibold text-indigo-400 hover:text-white rounded shadow hover:shadow-xl hover:shadow-indigo-500/10"
+          onMouseEnter={() => {
+            ReactTooltip.show(loginButtonRef.current);
+          }}
+          onClick={() => {
+            context.setAuthModalOpen(true);
+          }}
+        >
+          Log in
+        </button>
       </div>
     </div>
   );
