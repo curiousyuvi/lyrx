@@ -11,14 +11,10 @@ export default function AuthModal() {
   console.log("context", context);
   return (
     <div
-      className={"z-50 h-screen w-full fixed text-gray-600 flex items-center ".concat(
-        context.authModalOpen ? "" : "hidden"
-      )}
+      className={"z-50 h-screen w-full fixed text-gray-600 flex items-center "}
     >
       <div
-        className={"h-screen w-full bg-black/20 fixed z-40 ".concat(
-          context.authModalOpen ? "" : "hidden"
-        )}
+        className={"h-screen w-full bg-black/20 fixed z-40 "}
         onClick={() => {
           context.setAuthModalOpen(false);
         }}

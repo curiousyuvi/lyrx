@@ -27,7 +27,7 @@ function MyApp({ Component, pageProps }) {
           highlightColor="#f3f4f6"
           borderRadius="0.5rem"
         >
-          <AuthModal />
+          {authModalOpen ? <AuthModal /> : null}
           <Component {...pageProps} />
         </SkeletonTheme>
         <ReactTooltip type="light" effect="solid" />
