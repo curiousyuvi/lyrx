@@ -1,20 +1,20 @@
 import { useContext, useState } from "react";
-import { MyContext } from "../pages/_app";
 import { FcGoogle } from "react-icons/fc";
+import { useAuthContext } from "../providers/authProvider";
 
 export default function AuthModal() {
-  const context = useContext(MyContext);
+  const context = useAuthContext();
   const [Signup, setSignup] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   console.log("context", context);
-  return (
+  return context.authModalOpen ? (
     <div
       className={"z-50 h-screen w-full fixed text-gray-600 flex items-center "}
     >
       <div
-        className={"h-screen w-full bg-black/20 fixed z-40 "}
+        className={"h-screen w-full bg-black/20 backdrop-blur-sm fixed z-40 "}
         onClick={() => {
           context.setAuthModalOpen(false);
         }}
@@ -97,5 +97,5 @@ export default function AuthModal() {
         </span>
       </div>
     </div>
-  );
+  ) : null;
 }

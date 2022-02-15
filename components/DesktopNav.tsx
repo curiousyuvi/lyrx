@@ -3,11 +3,11 @@ import router from "next/router";
 import { useContext, useRef, useState } from "react";
 import { FaMicrophone, FaSearch } from "react-icons/fa";
 import ReactTooltip from "react-tooltip";
-import { MyContext } from "../pages/_app";
+import { useAuthContext } from "../providers/authProvider";
 import DesktopNavLink from "./DesktopNavLink";
 
 export default function DesktopNav() {
-  const context = useContext(MyContext);
+  const context = useAuthContext();
   const loginButtonRef = useRef();
   const [q, setQ] = useState("");
   return (

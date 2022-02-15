@@ -7,11 +7,9 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { SkeletonTheme } from "react-loading-skeleton";
 import AuthModal from "../components/authModal";
 import { createContext, useState } from "react";
-
-const MyContext = createContext(null);
+import AuthContextProvider from "../providers/authProvider";
 
 function MyApp({ Component, pageProps }) {
-  const [authModalOpen, setAuthModalOpen] = useState(false);
   return (
     <>
       <Head>
@@ -20,22 +18,21 @@ function MyApp({ Component, pageProps }) {
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0"
         />
       </Head>
-      <MyContext.Provider value={{ authModalOpen, setAuthModalOpen }}>
+      <AuthContextProvider>
         <Header />
         <SkeletonTheme
           baseColor="#e5e7eb"
           highlightColor="#f3f4f6"
           borderRadius="0.5rem"
         >
-          {authModalOpen ? <AuthModal /> : null}
+          <AuthModal />
           <Component {...pageProps} />
         </SkeletonTheme>
         <ReactTooltip type="light" effect="solid" />
         <Footer />
-      </MyContext.Provider>
+      </AuthContextProvider>
     </>
   );
 }
 
 export default MyApp;
-export { MyContext };
