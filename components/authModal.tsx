@@ -25,7 +25,7 @@ export default function AuthModal() {
           console.log("red");
         }}
       >
-        <h2 className="text-xl font-medium my-2 text-center">
+        <h2 className="text-2xl font-extrabold my-2 text-center">
           {Signup ? "Sign up" : "Log in"}
         </h2>
         <span className="text-sm my-4">
