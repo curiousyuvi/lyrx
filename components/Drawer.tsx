@@ -1,10 +1,22 @@
 import { BiHistory } from "react-icons/bi";
 import { FaRegHeart } from "react-icons/fa";
-import { FiHome, FiLogIn, FiTrendingUp } from "react-icons/fi";
+import { FiHome, FiLogIn, FiLogOut, FiTrendingUp } from "react-icons/fi";
 import { CgClose } from "react-icons/cg";
 import DrawerLink from "./DrawerLink";
+import { AuthContextType, useAuthContext } from "../providers/authProvider";
 
 export default function Drawer({ open, setOpen }) {
+  const authContext: AuthContextType = useAuthContext();
+
+  const handleLogin = () => {
+    setOpen(false);
+    authContext.setAuthModalOpen(true);
+  };
+  const handleLogout = () => {
+    setOpen(false);
+    authContext.logOut();
+  };
+
   return (
     <>
       <div
@@ -40,13 +52,29 @@ export default function Drawer({ open, setOpen }) {
           ButtonIcon={BiHistory}
           setOpen={setOpen}
         />
-        <DrawerLink
-          path="/login"
-          buttonText="Log in"
-          ButtonIcon={FiLogIn}
-          setOpen={setOpen}
-          recommended
-        />
+        {authContext.user === null ? (
+          <button onClick={handleLogin}>
+            <div
+              className={"bg-indigo-500/5".concat(
+                " flex items-center px-8 py-3 my-2 font-medium text-indigo-400 hover:text-indigo-500 hover:bg-indigo-500/10 rounded-xl"
+              )}
+            >
+              <FiLogIn className="inline-block mr-6 text-2xl" />
+              <h2 className="inline-block">Log in</h2>
+            </div>
+          </button>
+        ) : (
+          <button onClick={handleLogout}>
+            <div
+              className={"bg-red-500/5".concat(
+                " flex items-center px-8 py-3 my-2 font-medium text-red-400 hover:text-red-500 hover:bg-red-500/10 rounded-xl"
+              )}
+            >
+              <FiLogOut className="inline-block mr-6 text-2xl" />
+              <h2 className="inline-block">Log out</h2>
+            </div>
+          </button>
+        )}
       </div>
       <div
         onClick={() => {

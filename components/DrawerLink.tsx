@@ -1,12 +1,6 @@
 import Link from "next/link";
 
-export default function DrawerLink({
-  ButtonIcon,
-  buttonText,
-  path,
-  recommended,
-  setOpen,
-}) {
+export default function DrawerLink({ ButtonIcon, buttonText, path, setOpen }) {
   return (
     <Link href={path} passHref>
       <button
@@ -15,10 +9,7 @@ export default function DrawerLink({
         }}
       >
         <div
-          className={(recommended
-            ? "bg-indigo-500/10 text-indigo-500"
-            : "bg-transparent"
-          ).concat(
+          className={"bg-transparent".concat(
             " flex items-center px-8 py-3 my-2 font-medium hover:text-gray-800 hover:bg-black/5 rounded-xl"
           )}
         >
@@ -29,7 +20,3 @@ export default function DrawerLink({
     </Link>
   );
 }
-
-DrawerLink.defaultProps = {
-  recommended: false,
-};
