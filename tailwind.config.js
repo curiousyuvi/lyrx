@@ -10,6 +10,11 @@ module.exports = {
       xsm: "460px",
       ...defaultTheme.screens,
     },
+    extend: {
+      transitionProperty: {
+        width: "width",
+      },
+    },
   },
 
   plugins: [],

@@ -2,6 +2,7 @@ import Link from "next/link";
 import router from "next/router";
 import { useContext, useRef, useState } from "react";
 import { FaMicrophone, FaSearch } from "react-icons/fa";
+import { FiLogOut } from "react-icons/fi";
 import ReactTooltip from "react-tooltip";
 import { AuthContextType, useAuthContext } from "../providers/authProvider";
 import DesktopNavLink from "./DesktopNavLink";
@@ -17,7 +18,7 @@ export default function DesktopNav() {
         <div className="flex items-center relative">
           <FaSearch className="inline-block absolute object-center left-3 text-md text-indigo-400 " />
           <input
-            className="p-2 m-0 pl-10 text-gray-600 outline outline-1 outline-gray-300 rounded-md focus-visible:outline-indigo-500 focus-visible:outline-2 shadow focus:shadow-xl focus:shadow-indigo-500/10"
+            className="p-2 m-0 pl-10 transition-[width] w-24 focus-visible:w-80 text-gray-600 outline outline-1 outline-gray-300 rounded-md focus-visible:outline-indigo-500 focus-visible:outline-2 shadow focus:shadow-xl focus:shadow-indigo-500/10"
             name="search-field"
             value={q}
             placeholder="search by song title or artist name..."
@@ -66,7 +67,7 @@ export default function DesktopNav() {
               authContext.logOut();
             }}
           >
-            Log out
+            <FiLogOut />
           </button>
         )}
       </div>
