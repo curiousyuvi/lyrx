@@ -2,7 +2,6 @@ import app from "../secrets/firebase_config";
 import {
   createUserWithEmailAndPassword,
   getAuth,
-  onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
@@ -18,12 +17,14 @@ const logIn = async (email: string, password: string) => {
       password.trim()
     );
     console.log(result.user);
+    return result.user;
   } catch (e) {
     console.log("error: ", e);
+    return null;
   }
 };
 
-const signUp = async (email: string, password: string, name: string) => {
+const createAccount = async (email: string, password: string, name: string) => {
   try {
     const result = await createUserWithEmailAndPassword(
       auth,
@@ -32,8 +33,10 @@ const signUp = async (email: string, password: string, name: string) => {
     );
     updateProfile(result.user, { displayName: name.trim() });
     console.log(result.user);
+    return result.user;
   } catch (e) {
     console.log("error: ", e);
+    return null;
   }
 };
 
@@ -46,6 +49,26 @@ const logOut = () => {
   }
 };
 
+const getDisplayName = () => {
+  try {
+    console.log("fetched display name");
+    return auth.currentUser.displayName;
+  } catch (e) {
+    console.log("error: ", e);
+    return '';
+  }
+}
+
+const getUID = () => {
+  try {
+    console.log("fetched uid");
+    return auth.currentUser.uid;
+  } catch (e) {
+    console.log("error: ", e);
+    return '';
+  }
+}
+
 export default auth;
 
-export { logIn, signUp, logOut };
+export { logIn, createAccount, logOut, getDisplayName, getUID };
