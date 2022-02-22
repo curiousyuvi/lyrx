@@ -8,10 +8,10 @@ import SearchOptions from "../../components/SearchOptions";
 import Emoji from "../../components/Emoji";
 import getLyricCardItems from "../../services/get_lyric_card_items";
 import LyricCards from "../../components/LyricCards";
-import { LyricCardItem } from "../../services/get_popular_lyric_card_items";
 import { useRouter } from "next/router";
 import { GetServerSideProps } from "next/types";
 import ReactTooltip from "react-tooltip";
+import { LyricCardItem } from "../../models/lyricCardItem";
 
 export default function Search({
   prop_q,

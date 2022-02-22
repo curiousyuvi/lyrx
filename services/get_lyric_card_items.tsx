@@ -1,8 +1,8 @@
 import axios from "axios";
+import { LyricCardItem } from "../models/lyricCardItem";
 import API_KEY from "../secrets/apikey";
 import apikey from "../secrets/apikey";
 import { MUSIXMATCH_ENDPOINT } from "./endpoints";
-import { LyricCardItem } from "./get_popular_lyric_card_items";
 
 export default async function getLyricCardItems(
   q: string,
