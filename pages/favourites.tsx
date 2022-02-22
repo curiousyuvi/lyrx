@@ -1,4 +1,5 @@
 import { GetStaticProps } from "next";
+import Head from "next/head";
 import Emoji from "../components/Emoji";
 import Greeting from "../components/Greeting";
 import LyricCards from "../components/LyricCards";
@@ -31,18 +32,23 @@ export default function Favourites() {
     );
   }
   return (
-    <div className="bg-gray-100 min-h-screen w-full">
-      <div className="min-h-screen max-w-[1280px] mx-auto m-0 p-4 pt-32 flex flex-col">
-        <div className="flex items-center my-4 mt-6">
-          <h1 className="text-2xl sm:text-3xl font-medium text-gray-500 mr-4">
-            Favourites <Emoji symbol="0x1F60D" />
-          </h1>
+    <>
+      <Head>
+        <title>Favourites | Lyrx</title>
+      </Head>
+      <div className="bg-gray-100 min-h-screen w-full">
+        <div className="min-h-screen max-w-[1280px] mx-auto m-0 p-4 pt-32 flex flex-col">
+          <div className="flex items-center my-4 mt-6">
+            <h1 className="text-2xl sm:text-3xl font-medium text-gray-500 mr-4">
+              Favourites <Emoji symbol="0x1F60D" />
+            </h1>
+          </div>
+          <hr />
+          <LyricCards
+            lyricCardItems={firestoreContext.favouritesLyricCardItems}
+          />
         </div>
-        <hr />
-        <LyricCards
-          lyricCardItems={firestoreContext.favouritesLyricCardItems}
-        />
       </div>
-    </div>
+    </>
   );
 }
