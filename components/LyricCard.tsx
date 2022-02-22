@@ -5,11 +5,29 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { useState, useRef } from "react";
 import ReactTooltip from "react-tooltip";
 import Link from "next/link";
+import {
+  FirestoreContext,
+  useFirestoreContext,
+} from "../providers/firestoreProvider";
+import { AuthContext, useAuthContext } from "../providers/authProvider";
 
 export default function LyricCard({ artist, title, id }) {
   {
     const likeRef = useRef();
-    const [liked, setLiked] = useState(false);
+    const firestoreContext: FirestoreContext = useFirestoreContext();
+    const authContext: AuthContext = useAuthContext();
+
+    const liked = () => {
+      return firestoreContext.favouritesLyricCardItems.some((e) => e.id === id);
+    };
+
+    const handleLike = () => {
+      if (liked()) {
+        firestoreContext.deleteFavourite(id);
+      } else {
+        firestoreContext.addFavourite({ artist, title, id });
+      }
+    };
 
     return (
       <div className="bg-white h-40 rounded-md shadow-lg hover:shadow-xl flex flex-col justify-center relative overflow-hidden mx-2 my-4">
@@ -43,10 +61,8 @@ export default function LyricCard({ artist, title, id }) {
         <button
           ref={likeRef}
           className="absolute top-1 right-1 p-1 text-2xl text-pink-400 rounded-full hover:bg-pink-50"
-          onClick={() => {
-            setLiked(!liked);
-          }}
-          data-tip={liked ? "Remove from favorites" : "Add to favorites"}
+          onClick={handleLike}
+          data-tip={liked() ? "Remove from favourites" : "Add to favourites"}
           onMouseEnter={() => {
             ReactTooltip.show(likeRef.current);
           }}
@@ -54,7 +70,7 @@ export default function LyricCard({ artist, title, id }) {
             ReactTooltip.hide(likeRef.current);
           }}
         >
-          {liked ? <AiFillHeart /> : <AiOutlineHeart />}
+          {liked() ? <AiFillHeart /> : <AiOutlineHeart />}
         </button>
       </div>
     );

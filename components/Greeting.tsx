@@ -1,4 +1,4 @@
-import { AuthContextType, useAuthContext } from "../providers/authProvider";
+import { AuthContext, useAuthContext } from "../providers/authProvider";
 import Emoji from "./Emoji";
 
 const firstNameWithFirstLetterCapital = (str) => {
@@ -6,7 +6,7 @@ const firstNameWithFirstLetterCapital = (str) => {
 };
 
 export default function Greeting({ hours }: { hours: number }) {
-  const authContext: AuthContextType = useAuthContext();
+  const authContext: AuthContext = useAuthContext();
   return (
     <h1 className="text-3xl sm:text-4xl font-medium text-gray-500 mr-4 my-2 mb-6">
       {hours >= 0 ? (

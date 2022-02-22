@@ -3,10 +3,10 @@ import { FaRegHeart } from "react-icons/fa";
 import { FiHome, FiLogIn, FiLogOut, FiTrendingUp } from "react-icons/fi";
 import { CgClose } from "react-icons/cg";
 import DrawerLink from "./DrawerLink";
-import { AuthContextType, useAuthContext } from "../providers/authProvider";
+import { AuthContext, useAuthContext } from "../providers/authProvider";
 
 export default function Drawer({ open, setOpen }) {
-  const authContext: AuthContextType = useAuthContext();
+  const authContext: AuthContext = useAuthContext();
 
   const handleLogin = () => {
     setOpen(false);
@@ -41,8 +41,8 @@ export default function Drawer({ open, setOpen }) {
           setOpen={setOpen}
         />
         <DrawerLink
-          path="/favorites"
-          buttonText="Favorites"
+          path="/favourites"
+          buttonText="Favourites"
           ButtonIcon={FaRegHeart}
           setOpen={setOpen}
         />

@@ -1,11 +1,11 @@
 import { useContext, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { AuthContextType, useAuthContext } from "../providers/authProvider";
+import { AuthContext, useAuthContext } from "../providers/authProvider";
 import CreateAccountForm from "./createAccountForm";
 import LoginForm from "./loginForm";
 
 export default function AuthModal() {
-  const authContext: AuthContextType = useAuthContext();
+  const authContext: AuthContext = useAuthContext();
   const [newUser, setNewUser] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

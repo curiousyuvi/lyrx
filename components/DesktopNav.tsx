@@ -4,11 +4,11 @@ import { useContext, useRef, useState } from "react";
 import { FaMicrophone, FaSearch } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import ReactTooltip from "react-tooltip";
-import { AuthContextType, useAuthContext } from "../providers/authProvider";
+import { AuthContext, useAuthContext } from "../providers/authProvider";
 import DesktopNavLink from "./DesktopNavLink";
 
 export default function DesktopNav() {
-  const authContext: AuthContextType = useAuthContext();
+  const authContext: AuthContext = useAuthContext();
   const loginButtonRef = useRef();
   const logoutButtonRef = useRef();
   const [q, setQ] = useState("");
@@ -39,7 +39,7 @@ export default function DesktopNav() {
           />
         </div>
         <DesktopNavLink path="/" title="Home" />
-        <DesktopNavLink path="/favorites" title="Favorites" />
+        <DesktopNavLink path="/favourites" title="Favourites" />
         <DesktopNavLink path="/history" title="History" />
         {authContext.user === null ? (
           <button

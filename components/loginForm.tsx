@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { AuthContextType, useAuthContext } from "../providers/authProvider";
+import { AuthContext, useAuthContext } from "../providers/authProvider";
 import { FcGoogle } from "react-icons/fc";
 import { CircularProgress } from "@mui/material";
 
 export default function LoginForm({ setNewUser }) {
-  const authContext: AuthContextType = useAuthContext();
+  const authContext: AuthContext = useAuthContext();
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -105,7 +105,7 @@ export default function LoginForm({ setNewUser }) {
             />
             <p className="text-red-400 text-sm">{passwordError}</p>
           </span>
-          <button className="my-2 rounded-md bg-indigo-500 text-white px-2 py-2 text-center w-full hover:shadow-xl hover:shadow-indigo-500/20">
+          <button className="my-2 rounded-md bg-indigo-500 text-white px-2 py-2 text-center w-full hover:shadow-xl hover:shadow-indigo-500/20 flex items-center justify-center">
             {loading ? (
               <CircularProgress
                 style={{ color: "white" }}

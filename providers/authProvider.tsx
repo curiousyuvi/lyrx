@@ -8,8 +8,9 @@ import {
   useState,
 } from "react";
 import auth, { logIn, logOut, createAccount } from "../services/authService";
+import { getFavouritesLyricCardItems } from "../services/firestoreService";
 
-const AuthContext = createContext(null);
+const authContext = createContext(null);
 
 export default function AuthContextProvider({ children }) {
   const [authModalOpen, setAuthModalOpen] = useState(false);
@@ -27,6 +28,12 @@ export default function AuthContextProvider({ children }) {
         setDisplayName("");
         setUID("");
       }
+      console.log("current user: ", currentUser);
+      console.log("current user: ", currentUser);
+      console.log("user: ", user);
+      console.log("UID: ", `${UID}`);
+      if (UID != "") getFavouritesLyricCardItems(currentUser.uid);
+      //TODO: remove this
     });
     return () => {
       unsubscribe();
@@ -34,7 +41,7 @@ export default function AuthContextProvider({ children }) {
   }, []);
 
   return (
-    <AuthContext.Provider
+    <authContext.Provider
       value={{
         authModalOpen,
         setAuthModalOpen,
@@ -47,15 +54,15 @@ export default function AuthContextProvider({ children }) {
       }}
     >
       {children}
-    </AuthContext.Provider>
+    </authContext.Provider>
   );
 }
 
 const useAuthContext = () => {
-  return useContext(AuthContext);
+  return useContext(authContext);
 };
 
-interface AuthContextType {
+interface AuthContext {
   authModalOpen: boolean;
   setAuthModalOpen: Dispatch<SetStateAction<boolean>>;
   logIn: (email: string, password: string) => Promise<User>;
@@ -71,4 +78,4 @@ interface AuthContextType {
 }
 
 export { useAuthContext };
-export type { AuthContextType };
+export type { AuthContext as AuthContext };

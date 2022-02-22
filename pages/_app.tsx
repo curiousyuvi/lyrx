@@ -7,9 +7,14 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { SkeletonTheme } from "react-loading-skeleton";
 import AuthModal from "../components/authModal";
 import { createContext, useState } from "react";
-import AuthContextProvider from "../providers/authProvider";
+import AuthContextProvider, {
+  AuthContext,
+  useAuthContext,
+} from "../providers/authProvider";
+import FirestoreContextProvider from "../providers/firestoreProvider";
 
 function MyApp({ Component, pageProps }) {
+  const authContext: AuthContext = useAuthContext();
   return (
     <>
       <Head>
@@ -19,17 +24,19 @@ function MyApp({ Component, pageProps }) {
         />
       </Head>
       <AuthContextProvider>
-        <Header />
-        <SkeletonTheme
-          baseColor="#e5e7eb"
-          highlightColor="#f3f4f6"
-          borderRadius="0.5rem"
-        >
-          <AuthModal />
-          <Component {...pageProps} />
-        </SkeletonTheme>
-        <ReactTooltip type="light" effect="solid" />
-        <Footer />
+        <FirestoreContextProvider>
+          <Header />
+          <SkeletonTheme
+            baseColor="#e5e7eb"
+            highlightColor="#f3f4f6"
+            borderRadius="0.5rem"
+          >
+            <AuthModal />
+            <Component {...pageProps} />
+          </SkeletonTheme>
+          <ReactTooltip type="light" effect="solid" />
+          <Footer />
+        </FirestoreContextProvider>
       </AuthContextProvider>
     </>
   );

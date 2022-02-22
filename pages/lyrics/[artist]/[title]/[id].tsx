@@ -28,7 +28,7 @@ export default function Lyrics({
           <button
             ref={likeButtonRef}
             className="absolute top-6 right-6 p-2 text-3xl text-pink-500 rounded-full hover:bg-pink-500/10"
-            data-tip={liked ? "Remove from favorites" : "Add to favorites"}
+            data-tip={liked ? "Remove from favourites" : "Add to favourites"}
             onMouseEnter={() => {
               ReactTooltip.show(likeButtonRef.current);
             }}
