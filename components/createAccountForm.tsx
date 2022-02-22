@@ -78,12 +78,7 @@ export default function CreateAccountForm({ setNewUser }) {
           authContext.setAuthModalOpen(false);
         }}
       ></div>
-      <div
-        className="p-4 m-auto w-72 bg-white rounded-md shadow-xl z-50"
-        onClick={() => {
-          console.log("red");
-        }}
-      >
+      <div className="p-4 m-auto w-72 bg-white rounded-md shadow-xl z-50">
         <form onSubmit={handleSubmit}>
           <h2 className="text-2xl font-extrabold my-2 text-center">
             Create Account

@@ -2,10 +2,8 @@ import { GetStaticProps } from "next";
 import Emoji from "../components/Emoji";
 import Greeting from "../components/Greeting";
 import LyricCards from "../components/LyricCards";
-import getCountry, { Country } from "../services/get_country";
-import getPopularLyricCardItems, {
-  LyricCardItem,
-} from "../services/get_popular_lyric_card_items";
+import { LyricCardItem } from "../models/lyricCardItem";
+import getPopularLyricCardItems from "../services/get_popular_lyric_card_items";
 
 export default function Home({
   hours,
