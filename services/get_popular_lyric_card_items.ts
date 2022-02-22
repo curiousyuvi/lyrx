@@ -1,7 +1,5 @@
 import axios from "axios";
 import { LyricCardItem } from "../models/lyricCardItem";
-import apikey from "../secrets/apikey";
-import API_KEY from "../secrets/apikey";
 import { MUSIXMATCH_ENDPOINT } from "./endpoints";
 
 const getPopularLyricCardItems = async function (
@@ -17,7 +15,7 @@ const getPopularLyricCardItems = async function (
           page: 1,
           page_size: 100,
           country: country_id,
-          apikey: API_KEY,
+          apikey: process.env.REACT_APP_MUSIXMATCH_API_KEY,
         },
       }
     );

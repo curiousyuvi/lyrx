@@ -1,8 +1,8 @@
-import app from "../secrets/firebase_config";
 import { getFirestore, collection, getDocs, doc, setDoc, deleteDoc } from '@firebase/firestore';
 import favourites from "../pages/favourites";
 import { LyricCardItem } from "../models/lyricCardItem";
 import { HistoryLyricCardItem } from "../models/historyLyricCardItem";
+import app from '../firebase_config';
 
 const firestore = getFirestore(app);
 

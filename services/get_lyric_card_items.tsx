@@ -1,7 +1,5 @@
 import axios from "axios";
 import { LyricCardItem } from "../models/lyricCardItem";
-import API_KEY from "../secrets/apikey";
-import apikey from "../secrets/apikey";
 import { MUSIXMATCH_ENDPOINT } from "./endpoints";
 
 export default async function getLyricCardItems(
@@ -18,7 +16,7 @@ export default async function getLyricCardItems(
         page_size: 50,
         page: 1,
         s_track_rating: desc,
-        apikey: API_KEY,
+        apikey: process.env.REACT_APP_MUSIXMATCH_API_KEY,
       },
     });
 

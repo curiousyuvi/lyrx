@@ -1,6 +1,4 @@
 import axios from "axios";
-import API_KEY from "../secrets/apikey";
-import apikey from "../secrets/apikey";
 import { LYRICSOVH_ENDPOINT, MUSIXMATCH_ENDPOINT } from "./endpoints";
 
 interface LyricsItem {
@@ -31,7 +29,7 @@ const getLyricsItem = async (
         {
           params: {
             track_id: id,
-            apikey: API_KEY,
+            apikey: process.env.REACT_APP_MUSIXMATCH_API_KEY,
           },
         }
       );

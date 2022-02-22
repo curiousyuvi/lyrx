@@ -1,4 +1,3 @@
-import app from "../secrets/firebase_config";
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -6,6 +5,7 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
+import app from "../firebase_config";
 
 const auth = getAuth(app);
 
