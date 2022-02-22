@@ -11,6 +11,10 @@ import {
   useFirestoreContext,
 } from "../../../../providers/firestoreProvider";
 import Head from "next/head";
+import {
+  AuthContext,
+  useAuthContext,
+} from "../../../../providers/authProvider";
 
 export default function Lyrics({
   id,
@@ -25,9 +29,23 @@ export default function Lyrics({
   lyrics: string;
   loading: boolean;
 }) {
-  const [liked, setLiked] = useState(false);
   const likeButtonRef = useRef();
+  const authContext: AuthContext = useAuthContext();
   const firestoreContext: FirestoreContext = useFirestoreContext();
+  const liked = () => {
+    return firestoreContext.favouritesLyricCardItems.some((e) => e.id === id);
+  };
+  const handleLike = () => {
+    if (authContext.user === null) {
+      authContext.setAuthModalOpen(true);
+      return;
+    }
+    if (liked()) {
+      firestoreContext.deleteFavourite(id);
+    } else {
+      firestoreContext.addFavourite({ artist, title, id });
+    }
+  };
 
   useEffect(() => {
     firestoreContext.addHistory({ id, artist, title, timestamp: Date.now() });
@@ -44,18 +62,18 @@ export default function Lyrics({
             <button
               ref={likeButtonRef}
               className="absolute top-6 right-6 p-2 text-3xl text-pink-500 rounded-full hover:bg-pink-500/10"
-              data-tip={liked ? "Remove from favourites" : "Add to favourites"}
+              data-tip={
+                liked() ? "Remove from favourites" : "Add to favourites"
+              }
               onMouseEnter={() => {
                 ReactTooltip.show(likeButtonRef.current);
               }}
               onMouseLeave={() => {
                 ReactTooltip.hide(likeButtonRef.current);
               }}
-              onClick={() => {
-                setLiked(!liked);
-              }}
+              onClick={handleLike}
             >
-              {liked ? <AiFillHeart /> : <AiOutlineHeart />}
+              {liked() ? <AiFillHeart /> : <AiOutlineHeart />}
             </button>
             <h2 className="text-4xl m-4 font-medium text-gray-600  w-3/4">
               {title || <Skeleton />}
