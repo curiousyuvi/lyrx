@@ -1,18 +1,24 @@
 import { GetStaticPaths, GetStaticProps } from "next/types";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { FaMicrophoneAlt } from "react-icons/fa";
 import Skeleton from "react-loading-skeleton";
 import ReactTooltip from "react-tooltip";
 import "react-loading-skeleton/dist/skeleton.css";
 import getLyricsItem from "../../../../services/get_lyrics_item";
+import {
+  FirestoreContext,
+  useFirestoreContext,
+} from "../../../../providers/firestoreProvider";
 
 export default function Lyrics({
+  id,
   artist,
   title,
   lyrics,
   loading,
 }: {
+  id: string;
   artist: string;
   title: string;
   lyrics: string;
@@ -20,6 +26,11 @@ export default function Lyrics({
 }) {
   const [liked, setLiked] = useState(false);
   const likeButtonRef = useRef();
+  const firestoreContext: FirestoreContext = useFirestoreContext();
+
+  useEffect(() => {
+    firestoreContext.addHistory({ id, artist, title, timestamp: Date.now() });
+  }, []);
 
   return (
     <div className="bg-gray-100 min-h-screen w-full">
@@ -88,6 +99,7 @@ export const getStaticProps: GetStaticProps = async ({ params }: Params) => {
   var lyricsItem = await getLyricsItem(params.artist, params.title, params.id);
   return {
     props: {
+      id: params.id,
       artist: params.artist.toUpperCase(),
       title: params.title.toUpperCase(),
       lyrics: lyricsItem.lyrics,

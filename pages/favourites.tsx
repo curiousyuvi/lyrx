@@ -7,9 +7,6 @@ import {
   FirestoreContext,
   useFirestoreContext,
 } from "../providers/firestoreProvider";
-import getPopularLyricCardItems, {
-  LyricCardItem,
-} from "../services/get_popular_lyric_card_items";
 
 export default function Favourites() {
   const firestoreContext: FirestoreContext = useFirestoreContext();

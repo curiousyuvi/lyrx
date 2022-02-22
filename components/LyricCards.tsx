@@ -1,12 +1,16 @@
-import { LyricCardItem } from "../services/get_popular_lyric_card_items";
 import LyricCard from "./LyricCard";
 import Image from "next/image";
 import Emoji from "./Emoji";
+import { LyricCardItem } from "../models/lyricCardItem";
+import { HistoryLyricCardItem } from "../models/historyLyricCardItem";
+import HistoryLyricCard from "./historyLyricCard";
 
 export default function LyricCards({
   lyricCardItems,
+  history,
 }: {
-  lyricCardItems: LyricCardItem[];
+  lyricCardItems: LyricCardItem[] | HistoryLyricCardItem[];
+  history: boolean;
 }) {
   console.log(lyricCardItems);
   return !lyricCardItems || lyricCardItems.length == 0 ? (
@@ -19,6 +23,16 @@ export default function LyricCards({
   ) : (
     <div className="grid grid-cols-1 xsm:grid-cols-2 sm:grid-cols-3 md:grid-cols-4">
       {lyricCardItems.map((e) => {
+        if (history) {
+          return (
+            <HistoryLyricCard
+              key={e.id}
+              artist={e.artist}
+              title={e.title}
+              id={e.id}
+            />
+          );
+        }
         return (
           <LyricCard key={e.id} artist={e.artist} title={e.title} id={e.id} />
         );
@@ -26,3 +40,7 @@ export default function LyricCards({
     </div>
   );
 }
+
+LyricCards.defaultProps = {
+  history: false,
+};

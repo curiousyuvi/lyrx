@@ -1,7 +1,7 @@
 import { BsMusicNote } from "react-icons/bs";
 import { FaMicrophoneAlt } from "react-icons/fa";
 import { FiArrowRight } from "react-icons/fi";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { MdDelete } from "react-icons/md";
 import { useState, useRef } from "react";
 import ReactTooltip from "react-tooltip";
 import Link from "next/link";
@@ -10,10 +10,12 @@ import {
   useFirestoreContext,
 } from "../providers/firestoreProvider";
 import { AuthContext, useAuthContext } from "../providers/authProvider";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
-export default function LyricCard({ artist, title, id }) {
+export default function HistoryLyricCard({ artist, title, id }) {
   {
     const likeRef = useRef();
+    const deleteRef = useRef();
     const firestoreContext: FirestoreContext = useFirestoreContext();
     const authContext: AuthContext = useAuthContext();
 
@@ -31,6 +33,10 @@ export default function LyricCard({ artist, title, id }) {
       } else {
         firestoreContext.addFavourite({ artist, title, id });
       }
+    };
+
+    const handleDelete = () => {
+      firestoreContext.deleteHistory(id);
     };
 
     return (
@@ -64,7 +70,7 @@ export default function LyricCard({ artist, title, id }) {
         </Link>
         <button
           ref={likeRef}
-          className="absolute top-1 right-1 p-1 text-2xl text-pink-400 rounded-full hover:bg-pink-50"
+          className="absolute top-1 right-10 p-1 text-2xl text-pink-400 rounded-full hover:bg-pink-50"
           onClick={handleLike}
           data-tip={liked() ? "Remove from favourites" : "Add to favourites"}
           onMouseEnter={() => {
@@ -75,6 +81,20 @@ export default function LyricCard({ artist, title, id }) {
           }}
         >
           {liked() ? <AiFillHeart /> : <AiOutlineHeart />}
+        </button>
+        <button
+          ref={deleteRef}
+          className="absolute top-1 right-1 p-1 text-2xl text-red-200 rounded-full hover:text-red-500 hover:bg-red-50"
+          onClick={handleDelete}
+          data-tip="Remove from history"
+          onMouseEnter={() => {
+            ReactTooltip.show(deleteRef.current);
+          }}
+          onMouseLeave={() => {
+            ReactTooltip.hide(deleteRef.current);
+          }}
+        >
+          <MdDelete />
         </button>
       </div>
     );

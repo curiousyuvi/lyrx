@@ -1,13 +1,8 @@
 import axios from "axios";
+import { LyricCardItem } from "../models/lyricCardItem";
 import apikey from "../secrets/apikey";
 import API_KEY from "../secrets/apikey";
 import { MUSIXMATCH_ENDPOINT } from "./endpoints";
-
-interface LyricCardItem {
-  id: string;
-  title: string;
-  artist: string;
-}
 
 const getPopularLyricCardItems = async function (
   country_id: string
@@ -43,5 +38,3 @@ const getPopularLyricCardItems = async function (
 };
 
 export default getPopularLyricCardItems;
-
-export type { LyricCardItem };
