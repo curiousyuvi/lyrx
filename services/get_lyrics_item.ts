@@ -18,8 +18,6 @@ const getLyricsItem = async (
       )}`
     );
 
-    console.log("Lyrics loading from LYRICSOCH");
-    console.log(responseLOVH.data.lyrics);
     lyricsItem.lyrics = responseLOVH.data.lyrics;
   } catch (e) {
     console.error("error in getting lyrics from LYRICSOVH", e);
@@ -29,13 +27,11 @@ const getLyricsItem = async (
         {
           params: {
             track_id: id,
-            apikey: process.env.REACT_APP_MUSIXMATCH_API_KEY,
+            apikey: process.env.NEXT_PUBLIC_REACT_MUSIXMATCH_API_KEY,
           },
         }
       );
 
-      console.log("Lyrics loading from MUSIXMATCH");
-      console.log(responseMXM.data.message.body.lyrics.lyrics_body);
       lyricsItem.lyrics =
         responseMXM.data.message.body.lyrics.lyrics_body.split("*******")[0];
     } catch (e) {

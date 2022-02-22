@@ -56,6 +56,11 @@ export default function LoginForm({ setNewUser }) {
     return result;
   };
 
+  const handleGoogleLogin = () => {
+    authContext.authWithGoogle();
+    authContext.setAuthModalOpen(false);
+  };
+
   return (
     <div
       className={"z-50 h-screen w-full fixed text-gray-600 flex items-center "}
@@ -112,7 +117,10 @@ export default function LoginForm({ setNewUser }) {
             )}
           </button>
           <span className="flex justify-center text-sm">OR</span>
-          <button className="my-2 rounded-md text-red-500 outline outline-2 outline-red-500 opacity-60 hover:opacity-100 font-semibold px-2 py-1 text-center w-full hover:shadow-xl hover:shadow-red-500/20 flex items-center justify-center">
+          <button
+            className="my-2 rounded-md text-red-500 outline outline-2 outline-red-500 opacity-60 hover:opacity-100 font-semibold px-2 py-1 text-center w-full hover:shadow-xl hover:shadow-red-500/20 flex items-center justify-center"
+            onClick={handleGoogleLogin}
+          >
             Log in with
             <span className="mx-1 text-xl">
               <FcGoogle />

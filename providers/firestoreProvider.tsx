@@ -73,7 +73,6 @@ export default function FirestoreContextProvider({ children }) {
       const unsubscribe = onSnapshot(
         doc(firestore, "users", `${authContext.UID}`),
         (snapshot) => {
-          console.log("firestore listener called");
           if (snapshot.exists) {
             getFavouritesLyricCardItems(authContext.UID).then((data) =>
               setFavouritesLyricCardItems(data)

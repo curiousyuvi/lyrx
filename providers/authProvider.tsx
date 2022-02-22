@@ -7,8 +7,12 @@ import {
   useEffect,
   useState,
 } from "react";
-import auth, { logIn, logOut, createAccount } from "../services/authService";
-import { getFavouritesLyricCardItems } from "../services/firestoreService";
+import auth, {
+  logIn,
+  logOut,
+  createAccount,
+  authWithGoogle,
+} from "../services/authService";
 
 const authContext = createContext(null);
 
@@ -28,12 +32,6 @@ export default function AuthContextProvider({ children }) {
         setDisplayName("");
         setUID("");
       }
-      console.log("current user: ", currentUser);
-      console.log("current user: ", currentUser);
-      console.log("user: ", user);
-      console.log("UID: ", `${UID}`);
-      if (UID != "") getFavouritesLyricCardItems(currentUser.uid);
-      //TODO: remove this
     });
     return () => {
       unsubscribe();
@@ -51,6 +49,7 @@ export default function AuthContextProvider({ children }) {
         user,
         displayName,
         UID,
+        authWithGoogle,
       }}
     >
       {children}
@@ -75,6 +74,7 @@ interface AuthContext {
   user: User;
   displayName: string;
   UID: string;
+  authWithGoogle: () => void;
 }
 
 export { useAuthContext };

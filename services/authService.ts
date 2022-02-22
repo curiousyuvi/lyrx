@@ -1,7 +1,9 @@
 import {
   createUserWithEmailAndPassword,
   getAuth,
+  GoogleAuthProvider,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   updateProfile,
 } from "firebase/auth";
@@ -16,7 +18,6 @@ const logIn = async (email: string, password: string) => {
       email.trim(),
       password.trim()
     );
-    console.log(result.user);
     return result.user;
   } catch (e) {
     console.log("error: ", e);
@@ -32,7 +33,6 @@ const createAccount = async (email: string, password: string, name: string) => {
       password.trim()
     );
     updateProfile(result.user, { displayName: name.trim() });
-    console.log(result.user);
     return result.user;
   } catch (e) {
     console.log("error: ", e);
@@ -43,7 +43,6 @@ const createAccount = async (email: string, password: string, name: string) => {
 const logOut = () => {
   try {
     signOut(auth);
-    console.log("user signed out");
   } catch (e) {
     console.log("error: ", e);
   }
@@ -51,7 +50,6 @@ const logOut = () => {
 
 const getDisplayName = () => {
   try {
-    console.log("fetched display name");
     return auth.currentUser.displayName;
   } catch (e) {
     console.log("error: ", e);
@@ -61,7 +59,6 @@ const getDisplayName = () => {
 
 const getUID = () => {
   try {
-    console.log("fetched uid");
     return auth.currentUser.uid;
   } catch (e) {
     console.log("error: ", e);
@@ -69,6 +66,13 @@ const getUID = () => {
   }
 }
 
+const authWithGoogle = () => {
+  try {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider);
+  } catch (e) { console.error("error: ", e); }
+}
+
 export default auth;
 
-export { logIn, createAccount, logOut, getDisplayName, getUID };
+export { logIn, createAccount, logOut, getDisplayName, getUID, authWithGoogle };

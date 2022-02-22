@@ -16,11 +16,10 @@ export default async function getLyricCardItems(
         page_size: 50,
         page: 1,
         s_track_rating: desc,
-        apikey: process.env.REACT_APP_MUSIXMATCH_API_KEY,
+        apikey: process.env.NEXT_PUBLIC_REACT_MUSIXMATCH_API_KEY,
       },
     });
 
-    console.log("response", response.data.message.body.track_list);
     lyricCardItems = response.data.message.body.track_list.map((e) => {
       return {
         id: e.track.track_id,

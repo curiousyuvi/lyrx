@@ -36,7 +36,6 @@ export default function Home({
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const popularSongs = await getPopularLyricCardItems("US");
-  console.log(popularSongs);
 
   return {
     revalidate: 6400,

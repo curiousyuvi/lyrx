@@ -12,7 +12,6 @@ export default function LyricCards({
   lyricCardItems: LyricCardItem[] | HistoryLyricCardItem[];
   history: boolean;
 }) {
-  console.log(lyricCardItems);
   return !lyricCardItems || lyricCardItems.length == 0 ? (
     <div className="flex flex-col w-full items-center p-8">
       <Image src="/empty.svg" alt="Empty" height={200} width={200} />

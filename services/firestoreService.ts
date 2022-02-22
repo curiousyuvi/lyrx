@@ -13,7 +13,6 @@ const getFavouritesLyricCardItems = async (UID: string) => {
     try {
         const favouritesCollectionRef = collection(firestore, 'users', `${UID}`, 'favourites');
         const data = await getDocs(favouritesCollectionRef);
-        data.docs.forEach((e) => { console.log(e); });
         favouritesLyricCardItems = data.docs.map((e) => { return { id: e.data().id, title: e.data().title, artist: e.data().artist } });
     } catch (e) { console.error('error: ', e); } finally { return favouritesLyricCardItems }
 
@@ -48,7 +47,6 @@ const getHistoryLyricCardItems = async (UID: string) => {
     try {
         const historyCollectionRef = collection(firestore, 'users', `${UID}`, 'history');
         const data = await getDocs(historyCollectionRef);
-        data.docs.forEach((e) => { console.log(e); });
         historyLyricCardItems = data.docs.map((e) => { return { id: e.data().id, title: e.data().title, artist: e.data().artist, timestamp: e.data().timestamp } });
     } catch (e) { console.error('error: ', e); } finally { return historyLyricCardItems }
 

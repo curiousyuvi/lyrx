@@ -8,7 +8,6 @@ interface Country {
 const getCountry = async function (): Promise<Country> {
   try {
     const response = await axios.get("https://ipapi.co/json/");
-    console.log(response.data);
     return {
       code: response.data.country_code,
       name: response.data.country_name,

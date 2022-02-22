@@ -15,11 +15,10 @@ const getPopularLyricCardItems = async function (
           page: 1,
           page_size: 100,
           country: country_id,
-          apikey: process.env.REACT_APP_MUSIXMATCH_API_KEY,
+          apikey: process.env.NEXT_PUBLIC_REACT_MUSIXMATCH_API_KEY,
         },
       }
     );
-    console.log(response.data);
 
     popularLyricCardItems = response.data.message.body.track_list.map((e) => {
       return {
