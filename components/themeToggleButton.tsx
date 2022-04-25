@@ -6,7 +6,6 @@ export default function ThemeToggleButton() {
   const themeContext: ThemeContext = useThemeContext();
   function handleChange() {
     themeContext.switchTheme(!themeContext.isLightTheme);
-    console.log("switch here");
   }
   return (
     <div className="relative flex items-center">

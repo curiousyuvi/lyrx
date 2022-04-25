@@ -6,7 +6,6 @@ export default function ThemeContextProvider({ children }) {
   const [isLightTheme, setIsLightTheme] = useState(true);
   function switchTheme(flag) {
     setIsLightTheme(flag);
-    console.log("switched theme");
   }
   return (
     <themeContext.Provider value={{ isLightTheme, switchTheme }}>
