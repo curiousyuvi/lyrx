@@ -15,6 +15,10 @@ import {
   AuthContext,
   useAuthContext,
 } from "../../../../providers/authProvider";
+import {
+  ThemeContext,
+  useThemeContext,
+} from "../../../../providers/themeProvider";
 
 export default function Lyrics({
   id,
@@ -32,6 +36,7 @@ export default function Lyrics({
   const likeButtonRef = useRef();
   const authContext: AuthContext = useAuthContext();
   const firestoreContext: FirestoreContext = useFirestoreContext();
+  const themeContext: ThemeContext = useThemeContext();
   const liked = () => {
     return firestoreContext.favouritesLyricCardItems.some((e) => e.id === id);
   };
@@ -56,9 +61,19 @@ export default function Lyrics({
       <Head>
         <title>{title} | Lyrx</title>
       </Head>
-      <div className="bg-gray-100 min-h-screen w-full">
-        <div className="min-h-screen max-w-[1280px] mx-auto m-0 p-4 pt-28 flex flex-col text-gray-500">
-          <div className="p-4 min-h-screen w-full rounded-lg bg-white relative">
+      <div
+        className={"min-h-screen w-full".concat(
+          themeContext.isLightTheme ? " bg-gray-100 " : " bg-gray-800"
+        )}
+      >
+        <div className="min-h-screen max-w-[1280px] mx-auto m-0 p-4 pt-28 flex flex-col">
+          <div
+            className={"p-4 min-h-screen w-full rounded-lg relative".concat(
+              themeContext.isLightTheme
+                ? " bg-white text-gray-500"
+                : " bg-gray-700 text-gray-100"
+            )}
+          >
             <button
               ref={likeButtonRef}
               className="absolute top-6 right-6 p-2 text-3xl text-pink-500 rounded-full hover:bg-pink-500/10"
@@ -75,7 +90,7 @@ export default function Lyrics({
             >
               {liked() ? <AiFillHeart /> : <AiOutlineHeart />}
             </button>
-            <h2 className="text-4xl m-4 font-medium text-gray-600  w-3/4">
+            <h2 className="text-4xl m-4 font-medium  w-3/4">
               {title || <Skeleton />}
             </h2>
             <div className="text-xl m-4 flex items-center">

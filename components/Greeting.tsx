@@ -1,4 +1,5 @@
 import { AuthContext, useAuthContext } from "../providers/authProvider";
+import { ThemeContext, useThemeContext } from "../providers/themeProvider";
 import Emoji from "./Emoji";
 
 const firstNameWithFirstLetterCapital = (str) => {
@@ -7,8 +8,13 @@ const firstNameWithFirstLetterCapital = (str) => {
 
 export default function Greeting({ hours }: { hours: number }) {
   const authContext: AuthContext = useAuthContext();
+  const themeContext: ThemeContext = useThemeContext();
   return (
-    <h1 className="text-3xl sm:text-4xl font-medium text-gray-500 mr-4 my-2 mb-6">
+    <h1
+      className={"text-3xl sm:text-4xl font-medium mr-4 my-2 mb-6".concat(
+        themeContext.isLightTheme ? " text-gray-500" : " text-gray-100"
+      )}
+    >
       {hours >= 0 ? (
         hours >= 12 ? (
           hours >= 18 ? (

@@ -2,12 +2,14 @@ import Link from "next/link";
 import { useState } from "react";
 import { FiSearch, FiMenu } from "react-icons/fi";
 import Drawer from "./Drawer";
+import ThemeToggleButton from "./themeToggleButton";
 
 export default function MobileNav() {
   const [navBarOpen, setNavBarOpen] = useState(false);
 
   return (
     <div className="flex justify-center items-center">
+      <ThemeToggleButton />
       <Link href="/search">
         <a>
           <FiSearch className="p-2 rounded-full m-0 mr-1 xsm:mr-6 text-5xl text-indigo-400 rounded-full hover:text-indigo-500 hover:bg-indigo-500/5" />

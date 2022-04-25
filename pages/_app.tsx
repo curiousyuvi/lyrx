@@ -12,6 +12,7 @@ import AuthContextProvider, {
   useAuthContext,
 } from "../providers/authProvider";
 import FirestoreContextProvider from "../providers/firestoreProvider";
+import ThemeContextProvider from "../providers/themeProvider";
 
 function MyApp({ Component, pageProps }) {
   const authContext: AuthContext = useAuthContext();
@@ -24,21 +25,23 @@ function MyApp({ Component, pageProps }) {
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0"
         />
       </Head>
-      <AuthContextProvider>
-        <FirestoreContextProvider>
-          <Header />
-          <SkeletonTheme
-            baseColor="#e5e7eb"
-            highlightColor="#f3f4f6"
-            borderRadius="0.5rem"
-          >
-            <AuthModal />
-            <Component {...pageProps} />
-          </SkeletonTheme>
-          <ReactTooltip type="light" effect="solid" />
-          <Footer />
-        </FirestoreContextProvider>
-      </AuthContextProvider>
+      <ThemeContextProvider>
+        <AuthContextProvider>
+          <FirestoreContextProvider>
+            <Header />
+            <SkeletonTheme
+              baseColor="#e5e7eb"
+              highlightColor="#f3f4f6"
+              borderRadius="0.5rem"
+            >
+              <AuthModal />
+              <Component {...pageProps} />
+            </SkeletonTheme>
+            <ReactTooltip type="light" effect="solid" />
+            <Footer />
+          </FirestoreContextProvider>
+        </AuthContextProvider>
+      </ThemeContextProvider>
     </>
   );
 }
