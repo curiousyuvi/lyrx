@@ -1,11 +1,18 @@
 import router from "next/router";
 import { FaSearch } from "react-icons/fa";
+import { ThemeContext, useThemeContext } from "../providers/themeProvider";
 
 export default function MobileSearchField({ q, setQ, lyricWord, desc }) {
+  const themeContext: ThemeContext = useThemeContext();
+
   return (
     <div className="flex items-center w-full">
       <input
-        className="p-2 h-10 w-full text-mg sm:text-xl text-gray-600 outline outline-1 outline-gray-300 rounded-md rounded-r-none focus-visible:outline-indigo-500 shadow focus:shadow-xl focus:shadow-indigo-500/10"
+        className={"p-2 h-10 w-full text-mg sm:text-xl outline outline-1 outline-gray-300 rounded-md rounded-r-none focus-visible:outline-indigo-500 shadow focus:shadow-xl focus:shadow-indigo-500/10".concat(
+          themeContext.isLightTheme
+            ? " bg-white text-gray-600"
+            : " bg-gray-700 text-gray-100"
+        )}
         name="search-field"
         placeholder="search by song title or artist name..."
         value={q}

@@ -1,6 +1,7 @@
 import router from "next/router";
 import { useRef } from "react";
 import ReactTooltip from "react-tooltip";
+import { ThemeContext, useThemeContext } from "../providers/themeProvider";
 
 export default function SearchOptions({
   lyricWord,
@@ -10,9 +11,15 @@ export default function SearchOptions({
   q,
 }) {
   const searchButtonRef = useRef();
+  const themeContext: ThemeContext = useThemeContext();
+
   return (
     <div
-      className={`p-4 pt-6 my-4 w-full flex flex-col bg-indigo-50 rounded-lg text-gray-600 text-sm sm:text-lg shadow`}
+      className={"p-4 pt-6 my-4 w-full flex flex-col rounded-lg text-sm sm:text-lg shadow".concat(
+        themeContext.isLightTheme
+          ? " bg-indigo-200 text-gray-600"
+          : " bg-indigo-800 text-gray-200"
+      )}
     >
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4">
         <label className="font-medium">Filter by a word in lyric :</label>
@@ -28,7 +35,7 @@ export default function SearchOptions({
 
         <label className="font-medium">Sort by Popularity :</label>
         <div>
-          <span className="text-gray-800 font-semibold">
+          <span className="font-semibold">
             <input
               type="radio"
               className="mx-2"
@@ -40,7 +47,7 @@ export default function SearchOptions({
             ></input>
             <label>Ascending</label>
           </span>
-          <span className="text-gray-800 font-semibold">
+          <span className="font-semibold">
             <input
               type="radio"
               className="mx-2"

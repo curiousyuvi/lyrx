@@ -4,6 +4,7 @@ import Emoji from "./Emoji";
 import { LyricCardItem } from "../models/lyricCardItem";
 import { HistoryLyricCardItem } from "../models/historyLyricCardItem";
 import HistoryLyricCard from "./historyLyricCard";
+import { ThemeContext, useThemeContext } from "../providers/themeProvider";
 
 export default function LyricCards({
   lyricCardItems,
@@ -12,10 +13,20 @@ export default function LyricCards({
   lyricCardItems: LyricCardItem[] | HistoryLyricCardItem[];
   history: boolean;
 }) {
+  const themeContext: ThemeContext = useThemeContext();
   return !lyricCardItems || lyricCardItems.length == 0 ? (
     <div className="flex flex-col w-full items-center p-8">
-      <Image src="/empty.svg" alt="Empty" height={200} width={200} />
-      <span className="p-4 text-xl font-medium text-gray-500">
+      <Image
+        src={themeContext.isLightTheme ? "/empty.svg" : "/empty-d.svg"}
+        alt="Empty"
+        height={200}
+        width={200}
+      />
+      <span
+        className={"p-4 text-xl font-medium".concat(
+          themeContext.isLightTheme ? " text-gray-500" : " text-gray-200"
+        )}
+      >
         No lyrics found <Emoji symbol={"0x1F61E"} />
       </span>
     </div>

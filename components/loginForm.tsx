@@ -2,9 +2,11 @@ import { useState } from "react";
 import { AuthContext, useAuthContext } from "../providers/authProvider";
 import { FcGoogle } from "react-icons/fc";
 import { CircularProgress } from "@mui/material";
+import { ThemeContext, useThemeContext } from "../providers/themeProvider";
 
 export default function LoginForm({ setNewUser }) {
   const authContext: AuthContext = useAuthContext();
+  const themeContext: ThemeContext = useThemeContext();
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -62,16 +64,20 @@ export default function LoginForm({ setNewUser }) {
   };
 
   return (
-    <div
-      className={"z-50 h-screen w-full fixed text-gray-600 flex items-center "}
-    >
+    <div className={"z-50 h-screen w-full fixed flex items-center "}>
       <div
         className={"h-screen w-full bg-black/20 backdrop-blur-sm fixed z-40 "}
         onClick={() => {
           authContext.setAuthModalOpen(false);
         }}
       ></div>
-      <div className="p-4 m-auto w-72 bg-white rounded-md shadow-xl z-50">
+      <div
+        className={"p-4 m-auto w-72 rounded-md shadow-xl z-50".concat(
+          themeContext.isLightTheme
+            ? " bg-white text-gray-600"
+            : " bg-gray-700 text-gray-100"
+        )}
+      >
         <form onSubmit={handleSubmit}>
           <h2 className="text-2xl font-extrabold my-2 text-center">Log in</h2>
           <p className="text-sm text-red-400">{authError}</p>
@@ -80,7 +86,11 @@ export default function LoginForm({ setNewUser }) {
             <br />
             <input
               type="email"
-              className="rounded px-2 py-1 my-1 w-full outline outline-1 outline-indigo-500 focus:outline-2 focus:shadow-xl focus:shadow-indigo-500/20"
+              className={"rounded px-2 py-1 my-1 w-full outline outline-1 outline-indigo-500 focus:outline-2 focus:shadow-xl focus:shadow-indigo-500/20".concat(
+                themeContext.isLightTheme
+                  ? " bg-white text-gray-600"
+                  : " bg-gray-700 text-gray-100"
+              )}
               placeholder="johndoe1985@gmail.com"
               name="email"
               value={email}
@@ -95,7 +105,11 @@ export default function LoginForm({ setNewUser }) {
             <br />
             <input
               type="password"
-              className="rounded px-2 py-1 my-1 w-full outline outline-1 outline-indigo-500 focus:outline-2 focus:outline-indigo-500 focus:shadow-xl focus:shadow-indigo-500/20"
+              className={"rounded px-2 py-1 my-1 w-full outline outline-1 outline-indigo-500 focus:outline-2 focus:outline-indigo-500 focus:shadow-xl focus:shadow-indigo-500/20".concat(
+                themeContext.isLightTheme
+                  ? " bg-white text-gray-600"
+                  : " bg-gray-700 text-gray-100"
+              )}
               placeholder="password"
               name="password"
               value={password}
