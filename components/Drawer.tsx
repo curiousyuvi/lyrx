@@ -20,7 +20,7 @@ export default function Drawer({ open, setOpen }) {
   return (
     <>
       <div
-        className={"h-screen w-72 z-20 bg-white fixed right-0 top-0 flex flex-col p-4 py-2 divide-y-2 divide-black/10 text-xl shadow-2xl text-gray-500 font-medium transition duration-300 ".concat(
+        className={"h-screen w-72 z-20 bg-white fixed right-0 top-0 flex flex-col p-4 py-2 text-xl shadow-2xl text-gray-500 font-medium transition duration-300 ".concat(
           open ? "translate-x-0" : "translate-x-72"
         )}
       >
@@ -36,19 +36,19 @@ export default function Drawer({ open, setOpen }) {
 
         <DrawerLink
           path="/"
-          buttonText="Home"
+          buttonText="HOME"
           ButtonIcon={FiHome}
           setOpen={setOpen}
         />
         <DrawerLink
           path="/favourites"
-          buttonText="Favourites"
+          buttonText="FAVOURITES"
           ButtonIcon={FaRegHeart}
           setOpen={setOpen}
         />
         <DrawerLink
           path="/history"
-          buttonText="History"
+          buttonText="HISTORY"
           ButtonIcon={BiHistory}
           setOpen={setOpen}
         />
@@ -56,22 +56,22 @@ export default function Drawer({ open, setOpen }) {
           <button onClick={handleLogin}>
             <div
               className={"bg-indigo-500/5".concat(
-                " flex items-center px-8 py-3 my-2 font-medium text-indigo-400 hover:text-indigo-500 hover:bg-indigo-500/10 rounded-xl"
+                " flex items-center px-8 py-3 my-2 font-roboto-condensed font-bold text-indigo-400 hover:text-indigo-500 hover:bg-indigo-500/10 rounded-xl"
               )}
             >
               <FiLogIn className="inline-block mr-6 text-2xl" />
-              <h2 className="inline-block">Log in</h2>
+              <h2 className="inline-block">LOG IN</h2>
             </div>
           </button>
         ) : (
           <button onClick={handleLogout}>
             <div
               className={"bg-red-500/5".concat(
-                " flex items-center px-8 py-3 my-2 font-medium text-red-400 hover:text-red-500 hover:bg-red-500/10 rounded-xl"
+                " flex items-center px-8 py-3 my-2 font-roboto-condensed font-bold text-red-400 hover:text-red-500 hover:bg-red-500/10 rounded-xl"
               )}
             >
               <FiLogOut className="inline-block mr-6 text-2xl" />
-              <h2 className="inline-block">Log out</h2>
+              <h2 className="inline-block">LOG OUT</h2>
             </div>
           </button>
         )}

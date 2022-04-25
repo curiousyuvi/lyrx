@@ -9,7 +9,7 @@ export default function DesktopNavLink({ path, title }) {
       <a
         ref={desktopNavRef}
         data-tip={`Go to ${title}`}
-        className="hover:bg-indigo-500/5  px-4 py-2 h-10 mx-1 font-medium text-gray-500 hover:text-indigo-500 rounded "
+        className="hover:bg-indigo-500/5  px-4 py-2 h-10 mx-2 font-roboto-condensed font-bold text-gray-500 hover:text-indigo-500 rounded "
         onMouseEnter={() => {
           ReactTooltip.show(desktopNavRef.current);
         }}

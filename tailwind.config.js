@@ -11,6 +11,9 @@ module.exports = {
       ...defaultTheme.screens,
     },
     extend: {
+      fontFamily: {
+        "roboto-condensed": ['"Roboto Condensed"', "cursive"],
+      },
       transitionProperty: {
         width: "width",
       },
